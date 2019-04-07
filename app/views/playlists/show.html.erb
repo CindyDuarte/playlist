@@ -1,17 +1,19 @@
 
-    <p>
-      <%=@playlist.name%><br>
-      <%=@playlist.url%><br>
+<h1><%=@playlist.name%></h1>
+
+<ol>
 
 
-      <%# <%=@songs.name%><br> %>
-    </p>
+<%@playlist.songs.each do |song|%>
+  <li>
+      <%=song.name%><rb>
+      <%=song.url%>
+
+<iframe width="560" height="315" src= "<%= song.url %>" frameborder="0" allowfullscreen></iframe>
 
 
-    <ul>
-      <% @songs.each do |song|%>
-      <li>
-          <%=song.name%>
-      </li>
-      <%end%>
-    </ul>
+
+  </li>
+<%end%>
+
+</ol>

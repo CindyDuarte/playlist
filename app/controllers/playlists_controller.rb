@@ -9,8 +9,13 @@ class PlaylistsController < ApplicationController
   end
 
   def show     #5
+    # @user = User.find(params[:id])
+    # @playlist = Playlist.find(params[:id])
+    #
+    # @playlist = Playlist.all.find_by(@playlist.songs,@user.songs)
+    # @songs = Song.all.find_by(@playlist.songs,@user.songs)
+
     @playlist = Playlist.find(params[:id])
-    @songs = Song.all.find_by(@playlist.songs)
   end
 
   def create    #4
