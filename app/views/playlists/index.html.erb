@@ -1,0 +1,21 @@
+<h1>Mís Playlists</h1>
+
+<% if user_signed_in? %>
+ <%= link_to "Salir", destroy_user_session_path, :method => :delete %>
+<%end%>
+
+<h6> Hola <%= current_user.email%> </h6>
+
+<h5><%= link_to "Crea tu Playlist", new_playlist_path %></h5>
+
+<h2>Tus Playlists actuales</h2>
+
+<ul>
+  <% @playlists.each do |playlist|%>
+  <li>
+    <p>
+      <%=link_to playlist.name, playlist_path(playlist)%>
+    </p>
+  </li>
+  <%end%>
+</ul>

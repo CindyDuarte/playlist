@@ -1,0 +1,17 @@
+
+    <p>
+      <%=@playlist.name%><br>
+      <%=@playlist.url%><br>
+
+
+      <%# <%=@songs.name%><br> %>
+    </p>
+
+
+    <ul>
+      <% @songs.each do |song|%>
+      <li>
+          <%=song.name%>
+      </li>
+      <%end%>
+    </ul>

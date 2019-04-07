@@ -1,0 +1,12 @@
+
+<%= form_for @playlist do |f|%>
+  <div class="form-group">
+      <label for="playlist_name">Name</label>
+        <%= f.text_field :name %>
+  </div>
+  <div class="form-group">
+      <label for="playlist_url">Url</label>
+        <%= f.text_field :url %>
+  </div>
+  <%= f.submit %>
+<%end%>
