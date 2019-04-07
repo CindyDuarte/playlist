@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_and_belongs_to_many :playlists
+  has_and_belongs_to_many :songs
+  has_many :comments
+
 end
