@@ -1,10 +1,13 @@
 class PlaylistsController < ApplicationController
   def index    #1
     @playlists = Playlist.all
+    @one_user = User.find_by(params[current_user])
+    @users = User.all
   end
 
   def new      #2
     @playlist = Playlist.new
+    @song = Song.new
     render :form   #6 Crear vista form
   end
 
@@ -16,6 +19,7 @@ class PlaylistsController < ApplicationController
     # @songs = Song.all.find_by(@playlist.songs,@user.songs)
 
     @playlist = Playlist.find(params[:id])
+    @user = User.find_by(params[current_user])
   end
 
   def create    #4

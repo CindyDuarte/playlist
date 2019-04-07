@@ -8,10 +8,35 @@
 
 <h5><%= link_to "Crea tu Playlist", new_playlist_path %></h5>
 
-<h2>Tus Playlists actuales</h2>
+<h2>Todas las playlists</h2>
 
 <ul>
   <% @playlists.each do |playlist|%>
+  <li>
+    <p>
+      <%=link_to playlist.name, playlist_path(playlist)%>
+    </p>
+  </li>
+  <%end%>
+</ul>
+
+
+<h2>Playlists Otros usuarios</h2>
+
+<ul>
+  <% @users.each do |user|%>
+  <li>
+    <p>
+      <%=link_to user.email, playlist_path(user)%>
+    </p>
+  </li>
+  <%end%>
+</ul>
+
+<h2>Solo mis playlist</h2>
+
+<ul>
+  <% @one_user.playlists.each do |playlist|%>
   <li>
     <p>
       <%=link_to playlist.name, playlist_path(playlist)%>
