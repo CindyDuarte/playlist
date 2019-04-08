@@ -1,0 +1,12 @@
+<h1><%=@user.email%></h1>
+<button type="button" name="Home"><%= link_to "Volver al Home", root_path %></button><br><br>
+<button type="button" name="Todas las playlists"><%= link_to "Volver a la lista de canciones", playlists_path %></button><br><br>
+<ol>
+<%@user.playlists.each do |playlist|%>
+  <li>
+      <%=link_to playlist.name, playlist_path(@user)%><br><br><br>
+      
+
+  </li>
+<%end%>
+</ol>
