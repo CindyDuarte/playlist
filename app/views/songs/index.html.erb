@@ -1,0 +1,50 @@
+<h1>Lista de canciones creadas</h1>
+
+<h6> Hola <%= @one_user.email%> </h6><br>
+
+<h2>Solo mis Canciones</h2>
+
+<ul>
+  <% @one_user.songs.each do |song|%>
+  <li>
+    <p>
+      <%=link_to song.name, playlist_path(song)%>
+    </p>
+    <button type="button" name="Editar"><%=link_to "Editar", edit_song_path(song)%>></button>
+
+    <%= form_for song, :method => :delete do |f| %>
+    <%= f.submit %>
+    <% end %>
+
+  </li>
+  <%end%>
+</ul>
+
+<h2>Todas las canciones</h2>
+
+<ul>
+  <% @songs.each do |song|%>
+  <li>
+    <p>
+      <%=link_to song.name, song_path(song)%>
+    </p>
+
+  </li>
+  <%end%>
+</ul>
+
+
+<h2>Canciones Todos los usuarios</h2>
+
+<ul>
+  <% @users.each do |user|%>
+  <li>
+    <p>
+      <%=link_to user.email, song_path(user)%>
+    </p>
+  </li>
+  <%end%>
+</ul>
+
+<button type="button" name="Crear"><%= link_to "Nueva Playlist", new_playlist_path %></button><br><br>
+<button type="button" name="Home"><%= link_to "Volver al Home", playlists_path %></button><br><br>

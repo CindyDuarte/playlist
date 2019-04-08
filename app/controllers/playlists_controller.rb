@@ -7,8 +7,17 @@ class PlaylistsController < ApplicationController
 
   def new      #2
     @playlist = Playlist.new
-    @song = Song.new
     render :form   #6 Crear vista form
+  end
+
+  def create    #4
+    playlist = Playlist.new(playlist_parameters)
+
+    if playlist.save
+      redirect_to playlist_path(playlist)
+    else
+      redirect root_path
+    end
   end
 
   def show     #5
@@ -17,21 +26,28 @@ class PlaylistsController < ApplicationController
     #
     # @playlist = Playlist.all.find_by(@playlist.songs,@user.songs)
     # @songs = Song.all.find_by(@playlist.songs,@user.songs)
-
     @playlist = Playlist.find(params[:id])
-    @user = User.find_by(params[current_user])
+    # @user = User.find_by(params[current_user])
   end
 
-  def create    #4
-    playlist = Playlist.new(playlist_parameters)
 
-    if playlist.save
-      redirect_to playlist_path(playlist)
-    false
-      render root_path
-    end
+  def edit
+          @playlist = Playlist.find(params[:id])
+          render :form
   end
 
+  def update
+        playlist = Playlist.find(params[:id])
+
+        playlist.update(playlist_parameters)
+        redirect_to playlist_path(playlist)
+  end
+
+  def destroy
+        playlist = Playlist.find(params[:id])
+        playlist.destroy
+        redirect_to root_path
+  end
 
   private    #3
 

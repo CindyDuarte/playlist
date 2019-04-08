@@ -1,0 +1,12 @@
+<h1><%=@song.name%></h1>
+<button type="button" name="Home"><%= link_to "Volver al Home", root_path %></button><br><br>
+<button type="button" name="Todas las canciones"><%= link_to "Volver a la lista de canciones", songs_path %></button><br><br>
+<ol>
+<%@song.playlists.each do |playlist|%>
+  <li>
+      <%=playlist.name%><br>
+      <%=playlist.url%><br><br><br>
+      <iframe width="560" height="315" src= "<%= @song.url %>"></iframe><br><br><br>
+  </li>
+<%end%>
+</ol>
