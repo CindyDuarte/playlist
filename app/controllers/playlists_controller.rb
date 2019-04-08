@@ -12,8 +12,13 @@ class PlaylistsController < ApplicationController
 
   def create    #4
     # playlist = Playlist.new(playlist_parameters)
-    user = User.find_by(params[current_user.email])
-    playlist = Playlist.new(:users => [user])
+
+    # user = User.find_by(params[current_user.email])
+    # playlist = Playlist.new(:users => [user])
+
+    @user = User.find_by(params[:current_user])
+    playlist = @user.playlists.create(updated_at: Time.now)
+    # playlist = Playlist.create(updated_at: Time.now, users: [@user])
 
     if playlist.save
       redirect_to playlist_path(playlist)
@@ -27,9 +32,10 @@ class PlaylistsController < ApplicationController
     # @user = User.find(params[:id])
     # @playlist = Playlist.find(params[:id])
     #
-    # @playlist = Playlist.all.find_by(@playlist.songs,@user.songs)
+    # @playlist = Playlist.all.find(params[:id])
     # @songs = Song.all.find_by(@playlist.songs,@user.songs)
     @playlist = Playlist.find_by(params[:id])
+    p "vista show playlist"
     # @user = User.find_by(params[current_user])
   end
 

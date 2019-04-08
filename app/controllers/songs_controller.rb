@@ -9,16 +9,22 @@ class SongsController < ApplicationController
   def new      #2
     @song = Song.new
     render :form   #6 Crear vista form
+
   end
 
   def create    #4
     # song = Song.new(song_parameters)
-    user = User.find_by(params[current_user.email])
-    playlist = Playlist.find_by(params[:id])
-    song = Song.new(:playlists => [playlist],:users => [user])
 
+    # user = User.find_by(params[current_user.email])
+    # playlist = Playlist.find_by(params[:id])
+    # song = Song.new(:playlists => [playlist],:users => [user],:song => [song_parameters])
+
+    @playlist = Playlist.find_by(params[:id])
+    song = @playlist.songs.create(updated_at: Time.now)
+
+    p "Estoy en create"
     if song.save
-      redirect_to playlist_path(song)
+      redirect_to song_path(song)
     else
       p "No se guardo"
       redirect_to root_path
