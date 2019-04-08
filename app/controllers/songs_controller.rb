@@ -12,12 +12,16 @@ class SongsController < ApplicationController
   end
 
   def create    #4
-    song = Song.new(song_parameters)
+    # song = Song.new(song_parameters)
+    user = User.find_by(params[current_user.email])
+    playlist = Playlist.find_by(params[:id])
+    song = Song.new(:playlists => [playlist],:users => [user])
 
     if song.save
-      redirect_to song_path(song)
+      redirect_to playlist_path(song)
     else
-      redirect root_path
+      p "No se guardo"
+      redirect_to root_path
     end
   end
 

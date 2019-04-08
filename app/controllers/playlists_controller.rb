@@ -11,12 +11,15 @@ class PlaylistsController < ApplicationController
   end
 
   def create    #4
-    playlist = Playlist.new(playlist_parameters)
+    # playlist = Playlist.new(playlist_parameters)
+    user = User.find_by(params[current_user.email])
+    playlist = Playlist.new(:users => [user])
 
     if playlist.save
       redirect_to playlist_path(playlist)
     else
-      redirect root_path
+      p "no se guardo"
+      redirect_to root_path
     end
   end
 
@@ -26,7 +29,7 @@ class PlaylistsController < ApplicationController
     #
     # @playlist = Playlist.all.find_by(@playlist.songs,@user.songs)
     # @songs = Song.all.find_by(@playlist.songs,@user.songs)
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.find_by(params[:id])
     # @user = User.find_by(params[current_user])
   end
 
@@ -53,5 +56,6 @@ class PlaylistsController < ApplicationController
 
   def playlist_parameters
     params.require(:playlist).permit(:name, :url)
+
   end
 end
